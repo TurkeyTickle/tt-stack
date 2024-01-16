@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import TTDatePicker from "./tt-date-picker";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   firstName: z.string().min(2, {
@@ -38,6 +39,7 @@ function FormTest() {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     console.log(values);
+    toast('form was submitted', {  });
   };
 
   return (
