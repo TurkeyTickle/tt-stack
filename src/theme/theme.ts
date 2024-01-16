@@ -6,5 +6,5 @@ export const theme = createTheme({
     primaryColor: "cyan",
     headings: {
         fontFamily: "Greycliff CF, sans-serif",
-    }
+    },
 });

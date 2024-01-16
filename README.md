@@ -1,30 +1,61 @@
-# React + TypeScript + Vite
+# Introduction
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TurkeyTickle Stack is a prescriptive, opinionated project template for a front-end web development.
 
-Currently, two official plugins are available:
+## Project Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+TODO: Explain basic project structure
 
-## Expanding the ESLint configuration
+## Debugging (VS Code)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+TODO: Explain default debug/build configuration 
 
-- Configure the top-level `parserOptions` property like this:
+## Recommended Extensions
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+TODO: Explain .vscode/extensions.json
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Components 
+
+TODO: Explain library choice motivation
+
+## Routing
+
+TODO: Explain file based routing using vite plugin and route generation.
+
+## API Queries
+
+TODO: Explain basic use of TanStack Query
+
+## Models
+
+TODO: Explain models (zod)
+
+## Form Validation
+
+TODO: Explain schema validation
+
+## Styling
+
+TODO: Explain approach to styling components
+
+## Key Components
+
+- NPM - This is bad, is it worth switching to something else?
+- Vite ([Docs](https://vitejs.dev/)) - Build tool, HMR
+- React ([Docs](https://react.dev/)) - UI Framework
+- Mantine ([Docs](https://mantine.dev/) ) - Component library
+- Mantine React Table ([Docs](https://v2.mantine-react-table.com/)) - Data tables
+- Biome ([Docs](https://biomejs.dev/)) - Formatting, Linting
+- Zod ([Docs](https://zod.dev/)) - Schema validation for models and forms
+- Zustand ([Docs](https://zustand-demo.pmnd.rs/)) - App state management
+- TanStack Query ([Docs](https://tanstack.com/query/latest/docs/react/overview)) - API State management
+- TanStack Router ([Docs](https://tanstack.com/router)) - Routing
+
+
+## TODO
+
+- Add .env files
+- Figure out how to make sure form fields stay aligned when validation errors appear
+- Add editorconfig
+
+
