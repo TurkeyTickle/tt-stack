@@ -1,40 +1,86 @@
-import { Route as rootRoute } from './routes/__root'
-import { Route as TestRoute2Import } from './routes/test-route-2'
-import { Route as TestRoute1Import } from './routes/test-route-1'
-import { Route as IndexImport } from './routes/index'
+import { Route as rootRoute } from "./routes/__root"
+import { Route as MainLayoutImport } from "./routes/_main-layout"
+import { Route as BlankLayoutImport } from "./routes/_blank-layout"
+import { Route as MainLayoutIndexImport } from "./routes/_main-layout/index"
+import { Route as BlankLayoutLoginImport } from "./routes/_blank-layout/login"
+import { Route as MainLayoutExamplesTwoImport } from "./routes/_main-layout/examples/two"
+import { Route as MainLayoutExamplesPostsIndexImport } from "./routes/_main-layout/examples/posts/index"
+import { Route as MainLayoutExamplesPostsPostIdIndexImport } from "./routes/_main-layout/examples/posts/$postId.index"
 
-const TestRoute2Route = TestRoute2Import.update({
-  path: '/test-route-2',
+const MainLayoutRoute = MainLayoutImport.update({
+  id: "/_main-layout",
   getParentRoute: () => rootRoute,
 } as any)
 
-const TestRoute1Route = TestRoute1Import.update({
-  path: '/test-route-1',
+const BlankLayoutRoute = BlankLayoutImport.update({
+  id: "/_blank-layout",
   getParentRoute: () => rootRoute,
 } as any)
 
-const IndexRoute = IndexImport.update({
-  path: '/',
-  getParentRoute: () => rootRoute,
+const MainLayoutIndexRoute = MainLayoutIndexImport.update({
+  path: "/",
+  getParentRoute: () => MainLayoutRoute,
 } as any)
-declare module '@tanstack/react-router' {
+
+const BlankLayoutLoginRoute = BlankLayoutLoginImport.update({
+  path: "/login",
+  getParentRoute: () => BlankLayoutRoute,
+} as any)
+
+const MainLayoutExamplesTwoRoute = MainLayoutExamplesTwoImport.update({
+  path: "/examples/two",
+  getParentRoute: () => MainLayoutRoute,
+} as any)
+
+const MainLayoutExamplesPostsIndexRoute =
+  MainLayoutExamplesPostsIndexImport.update({
+    path: "/examples/posts/",
+    getParentRoute: () => MainLayoutRoute,
+  } as any)
+
+const MainLayoutExamplesPostsPostIdIndexRoute =
+  MainLayoutExamplesPostsPostIdIndexImport.update({
+    path: "/examples/posts/$postId/",
+    getParentRoute: () => MainLayoutRoute,
+  } as any)
+declare module "@tanstack/react-router" {
   interface FileRoutesByPath {
-    '/': {
-      preLoaderRoute: typeof IndexImport
+    "/_blank-layout": {
+      preLoaderRoute: typeof BlankLayoutImport
       parentRoute: typeof rootRoute
     }
-    '/test-route-1': {
-      preLoaderRoute: typeof TestRoute1Import
+    "/_main-layout": {
+      preLoaderRoute: typeof MainLayoutImport
       parentRoute: typeof rootRoute
     }
-    '/test-route-2': {
-      preLoaderRoute: typeof TestRoute2Import
-      parentRoute: typeof rootRoute
+    "/_blank-layout/login": {
+      preLoaderRoute: typeof BlankLayoutLoginImport
+      parentRoute: typeof BlankLayoutImport
+    }
+    "/_main-layout/": {
+      preLoaderRoute: typeof MainLayoutIndexImport
+      parentRoute: typeof MainLayoutImport
+    }
+    "/_main-layout/examples/two": {
+      preLoaderRoute: typeof MainLayoutExamplesTwoImport
+      parentRoute: typeof MainLayoutImport
+    }
+    "/_main-layout/examples/posts/": {
+      preLoaderRoute: typeof MainLayoutExamplesPostsIndexImport
+      parentRoute: typeof MainLayoutImport
+    }
+    "/_main-layout/examples/posts/$postId/": {
+      preLoaderRoute: typeof MainLayoutExamplesPostsPostIdIndexImport
+      parentRoute: typeof MainLayoutImport
     }
   }
 }
 export const routeTree = rootRoute.addChildren([
-  IndexRoute,
-  TestRoute1Route,
-  TestRoute2Route,
+  BlankLayoutRoute.addChildren([BlankLayoutLoginRoute]),
+  MainLayoutRoute.addChildren([
+    MainLayoutIndexRoute,
+    MainLayoutExamplesTwoRoute,
+    MainLayoutExamplesPostsIndexRoute,
+    MainLayoutExamplesPostsPostIdIndexRoute,
+  ]),
 ])
