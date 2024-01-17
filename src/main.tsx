@@ -4,12 +4,12 @@ import { Router, RouterProvider } from "@tanstack/react-router";
 import { MantineProvider } from "@mantine/core";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Notifications } from "@mantine/notifications";
-import { routeTree } from "./routeTree.gen";
 import { theme } from "./theme/theme";
 
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 import "@mantine/notifications/styles.css";
+import { routeTree } from "./route-tree.gen";
 
 const queryClient = new QueryClient();
 

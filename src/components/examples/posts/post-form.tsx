@@ -9,8 +9,8 @@ import {
 import { useForm, zodResolver } from "@mantine/form";
 import { useEffect } from "react";
 import { notifications } from "@mantine/notifications";
-import { PostModel, postSchema } from "@/models/example/post.model";
-import { useUpdatePostMutation } from "@/services/posts.service";
+import { PostModel, postSchema } from "@/models/examples/post.model";
+import { useUpdatePostMutation } from "@/services/examples/posts.service";
 
 interface Props {
 	post: PostModel;

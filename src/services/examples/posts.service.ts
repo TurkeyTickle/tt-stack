@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/axios-instance";
-import { postSchema, PostModel } from "@/models/example/post.model";
+import { postSchema, PostModel } from "@/models/examples/post.model";
 import { queryOptions, useMutation } from "@tanstack/react-query";
 import { z } from "zod";
 

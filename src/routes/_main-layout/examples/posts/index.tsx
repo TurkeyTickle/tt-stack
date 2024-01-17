@@ -1,4 +1,4 @@
-import { postsQueryOptions } from "@/services/posts.service";
+import { postsQueryOptions } from "@/services/examples/posts.service";
 import { Anchor, Stack, Title } from "@mantine/core";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { FileRoute, Link } from "@tanstack/react-router";
