@@ -7,10 +7,10 @@ import {
 	Fieldset,
 } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
-import { PostModel, postSchema } from "../../../models/example/post.model";
-import { useUpdatePostMutation } from "../../../services/posts.service";
 import { useEffect } from "react";
 import { notifications } from "@mantine/notifications";
+import { PostModel, postSchema } from "@/models/example/post.model";
+import { useUpdatePostMutation } from "@/services/posts.service";
 
 interface Props {
 	post: PostModel;

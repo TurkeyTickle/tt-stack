@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Router, RouterProvider } from "@tanstack/react-router";
-import { routeTree } from "./routeTree.gen";
 import { MantineProvider } from "@mantine/core";
-import { theme } from "./theme/theme";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Notifications } from "@mantine/notifications";
+import { routeTree } from "./routeTree.gen";
+import { theme } from "./theme/theme";
 
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";

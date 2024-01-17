@@ -1,4 +1,4 @@
-import PersonForm from "../../components/person/person-form";
+import PersonForm from "@/components/person/person-form";
 import { Title } from "@mantine/core";
 import { FileRoute } from "@tanstack/react-router";
 

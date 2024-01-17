@@ -1,10 +1,7 @@
 import { Button, Group, Select, SimpleGrid, TextInput } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { DatePickerInput } from "@mantine/dates";
-import {
-	exampleSchema,
-	relationshipStatusEnum,
-} from "../../models/example.model";
+import { exampleSchema, relationshipStatusEnum } from "@/models/example.model";
 
 function PersonForm() {
 	const form = useForm({

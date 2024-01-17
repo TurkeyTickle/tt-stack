@@ -1,7 +1,7 @@
+import { axiosInstance } from "@/axios-instance";
+import { postSchema, PostModel } from "@/models/example/post.model";
 import { queryOptions, useMutation } from "@tanstack/react-query";
-import { PostModel, postSchema } from "../models/example/post.model";
 import { z } from "zod";
-import { axiosInstance } from "../axios-instance";
 
 const postsUrl = `${import.meta.env.VITE_EXAMPLE_API_URL}/posts`;
 

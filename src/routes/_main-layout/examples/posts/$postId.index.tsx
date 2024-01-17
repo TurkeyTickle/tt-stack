@@ -1,7 +1,7 @@
 import { FileRoute, useNavigate } from "@tanstack/react-router";
-import PostForm from "../../../../components/examples/posts/post-form";
-import { postQueryOptions } from "../../../../services/posts.service";
 import { Paper, Title } from "@mantine/core";
+import PostForm from "@/components/examples/posts/post-form";
+import { postQueryOptions } from "@/services/posts.service";
 
 export const Route = new FileRoute("/_main-layout/examples/posts/$postId/").createRoute({
 	loader: ({ context: { queryClient }, params: { postId } }) =>

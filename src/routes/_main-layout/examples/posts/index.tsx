@@ -1,7 +1,7 @@
+import { postsQueryOptions } from "@/services/posts.service";
 import { Anchor, Stack, Title } from "@mantine/core";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { FileRoute, Link } from "@tanstack/react-router";
-import { postsQueryOptions } from "../../../../services/posts.service";
 
 export const Route = new FileRoute("/_main-layout/examples/posts/").createRoute(
 	{
