@@ -45,6 +45,7 @@ TODO: Explain approach to styling components
 - React ([Docs](https://react.dev/)) - UI Framework
 - Mantine ([Docs](https://mantine.dev/) ) - Component library
 - Mantine React Table ([Docs](https://v2.mantine-react-table.com/)) - Data tables
+- Tabler Icons ([Docs](https://tabler.io/docs/getting-started)) - Icons
 - Biome ([Docs](https://biomejs.dev/)) - Formatting, Linting
 - Zod ([Docs](https://zod.dev/)) - Schema validation for models and forms
 - Zustand ([Docs](https://zustand-demo.pmnd.rs/)) - App state management
@@ -56,6 +57,5 @@ TODO: Explain approach to styling components
 
 - Add .env files
 - Figure out how to make sure form fields stay aligned when validation errors appear
-- Add editorconfig
 
 

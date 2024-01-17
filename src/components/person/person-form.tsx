@@ -1,7 +1,7 @@
-import { Box, Button, Group, Select, TextInput } from "@mantine/core";
+import { Button, Group, Select, SimpleGrid, TextInput } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { DatePickerInput } from "@mantine/dates";
-import { genderEnum } from "../../models/gender";
+import { relationshipStatusEnum } from "../../models/relationship-status";
 import { personSchema } from "../../models/person";
 
 function PersonForm() {
@@ -10,39 +10,35 @@ function PersonForm() {
 	});
 
 	return (
-		<Box>
-			<form onSubmit={form.onSubmit((values) => console.log(values))}>
-				<Group grow>
-					<TextInput
-						withAsterisk
-						label="First Name"
-						{...form.getInputProps("firstName")}
-					/>
-					<TextInput
-						withAsterisk
-						label="Last Name"
-						{...form.getInputProps("lastName")}
-					/>
-				</Group>
-				<Group grow>
-					<Select
-						withAsterisk
-						label="Gender"
-						data={genderEnum.options}
-						{...form.getInputProps("gender")}
-						allowDeselect={false}
-					/>
-					<DatePickerInput
-						withAsterisk
-						label="Date of Birth"
-						{...form.getInputProps("dob")}
-					/>
-				</Group>
-				<Group justify="flex-end" mt="md">
-					<Button type="submit">Submit</Button>
-				</Group>
-			</form>
-		</Box>
+		<form onSubmit={form.onSubmit((values) => console.log(values))}>
+			<SimpleGrid cols={{ sm: 2 }}>
+				<TextInput
+					withAsterisk
+					label="First Name"
+					{...form.getInputProps("firstName")}
+				/>
+				<TextInput
+					withAsterisk
+					label="Last Name"
+					{...form.getInputProps("lastName")}
+				/>
+				<Select
+					withAsterisk
+					label="Relationship Status"
+					data={relationshipStatusEnum.options}
+					{...form.getInputProps("relationshipStatus")}
+					allowDeselect={false}
+				/>
+				<DatePickerInput
+					withAsterisk
+					label="Date of Birth"
+					{...form.getInputProps("dob")}
+				/>
+			</SimpleGrid>
+			<Group justify="flex-end" mt="md">
+				<Button type="submit">Submit</Button>
+			</Group>
+		</form>
 	);
 }
 

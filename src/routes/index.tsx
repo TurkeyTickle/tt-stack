@@ -9,7 +9,7 @@ export const Route = new FileRoute('/').createRoute({
 function HomeRoute() {
 	return (
 		<div className="p-2">
-			<Title>Welcome Home!</Title>
+			<Title>Home</Title>
 			<PersonForm />
 		</div>
 	);
