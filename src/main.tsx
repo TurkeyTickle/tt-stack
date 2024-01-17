@@ -1,26 +1,29 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import { Router, RouterProvider } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
+import { MantineProvider } from "@mantine/core";
+import { theme } from "./theme/theme";
 
-// Set up a Router instance
+import "@mantine/core/styles.css";
+import "@mantine/dates/styles.css";
+
 const router = new Router({
-  routeTree,
-  defaultPreload: 'intent',
-})
+	routeTree,
+	defaultPreload: "intent",
+});
 
-// Register things for typesafety
-declare module '@tanstack/react-router' {
-  interface Register {
-    router: typeof router
-  }
+declare module "@tanstack/react-router" {
+	interface Register {
+		router: typeof router;
+	}
 }
-
 
 // biome-ignore lint/style/noNonNullAssertion: <explanation>
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+	<React.StrictMode>
+		<MantineProvider theme={theme}>
+			<RouterProvider router={router} />
+		</MantineProvider>
+	</React.StrictMode>,
 );

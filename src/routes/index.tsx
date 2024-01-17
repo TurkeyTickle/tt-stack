@@ -1,13 +1,16 @@
-import { FileRoute } from '@tanstack/react-router'
+import PersonForm from "../components/person/person-form";
+import { Title } from "@mantine/core";
+import { FileRoute } from "@tanstack/react-router";
 
 export const Route = new FileRoute('/').createRoute({
-  component: HomeRoute,
-})
+	component: HomeRoute,
+});
 
 function HomeRoute() {
-  return (
-    <div className="p-2">
-      <h3>Welcome Home!</h3>
-    </div>
-  )
+	return (
+		<div className="p-2">
+			<Title>Home</Title>
+			<PersonForm />
+		</div>
+	);
 }
