@@ -1,7 +1,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as TestRoute2Import } from './routes/test-route-2'
 import { Route as TestRoute1Import } from './routes/test-route-1'
-import { Route as IndexImport } from './routes'
+import { Route as IndexImport } from './routes/index'
 
 const TestRoute2Route = TestRoute2Import.update({
   path: '/test-route-2',

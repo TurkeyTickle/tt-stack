@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { relationshipStatusEnum } from './relationship-status';
+import { relationshipStatusEnum } from './enums/relationship-status.enum';
 
 export const personSchema = z.object({
   firstName: z.string().min(2).max(20),

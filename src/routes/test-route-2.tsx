@@ -1,7 +1,7 @@
 import { Title } from "@mantine/core";
 import { FileRoute } from "@tanstack/react-router";
 
-export const Route = new FileRoute("/test-route-2").createRoute({
+export const Route = new FileRoute('/test-route-2').createRoute({
 	component: TestRoute2Route,
 });
 

@@ -8,13 +8,11 @@ import { theme } from "./theme/theme";
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 
-// Set up a Router instance
 const router = new Router({
 	routeTree,
 	defaultPreload: "intent",
 });
 
-// Register things for typesafety
 declare module "@tanstack/react-router" {
 	interface Register {
 		router: typeof router;
