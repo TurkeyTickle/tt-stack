@@ -3,10 +3,10 @@
   "configurations": [
     {
       "name": "Debug Client (Chrome)",
-      "request": "launch",
       "type": "chrome",
+      "request": "launch",
       "url": "http://localhost:5173",
-      "webRoot": "${workspaceFolder}/src",
+      "webRoot": "${workspaceFolder}",
       "preLaunchTask": "build:dev",
       "resolveSourceMapLocations": [
         "${workspaceFolder}/**",
@@ -18,7 +18,7 @@
       "type": "msedge",
       "request": "launch",
       "url": "http://localhost:5173",
-      "webRoot": "${workspaceFolder}/src",
+      "webRoot": "${workspaceFolder}",
       "preLaunchTask": "build:dev",
       "resolveSourceMapLocations": [
         "${workspaceFolder}/**",
