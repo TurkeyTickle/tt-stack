@@ -45,10 +45,14 @@ The `.vscode` directory contains `launch.json` and `tasks.json` files that tell 
 
 If you don't need a debugger and would rather just start the dev server and open the page in a browser manually, you can run the default build task by pressing `ctrl+shift+b` (windows) or `cmd+shift+b` (mac), or you can run the `pnpm run dev` command from a terminal at the project root.
 
+Either way, as long as the `pnpm run dev` command is running, Vite will hot reload the browser tab whenever changes are saved.
+
 ## Components
 
  All components that do not map directly to a URL route belong in the `routes` directory. These are components that are meant to be used from *within* route components, so a component requires things like a ID that comes from the route, that ID should be passed into the component as a prop. When a route component needs to be able to respond to an action that occurs within the component, a function prop should be passed from the route component to the shared component and called when the event occurs so the route component can respond appropriately. See the simplified examples below or `src/components/examples/users/user-form.tsx` for a more detailed example.
+
 ### Shared component example
+
 ```tsx
 interface Props {
 	user: UserModel;
@@ -62,7 +66,9 @@ function UserForm({ user, onSaved }: Props) {
 	)
 }
 ```
+
 ### Usage in route component 
+
 ```tsx
 <UserForm
 	user={user}
@@ -88,7 +94,7 @@ When editing a user, the application flow usually goes something like this:
 4. The application queries the API for the item's details, showing the user a spinner
 5. The application populates the form with the result from the API
 
-The combination of TanStack Router/Query provides the ability to do the last three steps in parallel, making the application feel much more responsive. In some cases, the route's data can even be prefetched when the user hovers over the "edit record" button, which can result essentially zero perceptible load time when the user clicks the button.
+The combination of TanStack Router/Query provides the ability to essentially do the last three steps in parallel, making the application feel much more responsive. In some cases, the route's data can even be prefetched when the user hovers over the "edit record" button, which can result essentially zero perceptible load time when the user clicks the button.
 
 This is purely a UX optimization and may not always be worth implementing, but in some cases it's an easy win and should be considered on a case-by-case basis. 
 
@@ -97,6 +103,7 @@ When running the application in local development mode, the TanStack Router DevT
 ## API Queries
 
 API requests are handled with a combination of TanStack Query and Axios. Axios is responsible for the actual HTTP request, while TanStack Query sits on top providing things like result caching, retries, and exponential backoff.
+
 ### Axios
 
 All API requests should use the Axios instance that is exported from `src/axios-instance.ts`. This instance provides standard request configuration and important interceptors that can do things like automatically redirect to a login page if a session expires, or display a toast notification telling the user that something went wrong when an API request fails.
@@ -105,23 +112,25 @@ All API requests should use the Axios instance that is exported from `src/axios-
 
 TanStack Query provides two primary React hooks - `useQuery` and `useMutation`. Examples of the use of both of these hooks can be found at `src/routes/_main-layout/examples/users/index.tsx` and `src/routes/_main-layout/examples/users/$userId.index.tsx`. Both hooks provide caching, retries, and exponential backoff by default, but can be overridden as needed. 
 
-When running the application in a local development environment, the TanStack Query DevTools will appear in the bottom-left corner of the page. These dev tools can be used to monitor the status of all queries and mutations, and to do helpful things like invalidate caches. These dev tools are excluded from UAT and Prod builds.
+When running the application in a local development environment, the TanStack Query DevTools will appear in the bottom-left corner of the page. These dev tools can be used to monitor the status of all queries and mutations, and to do helpful things like invalidate caches so the data is refetched from the server. These dev tools are excluded from UAT and Prod builds.
 
 ## Models
 
-TODO: Explain models with zod
+A common problem with retrieving data from an API in Typescript applications is that even if you've specified a type on the object that is holding the data that was returned from the API, the actual properties on that object might not match the properties defined in the type at all. Typescript is purely a development tool and is stripped away when the application is built for production, so Typescript can't by itself guarantee that an object matches the shape of a type during runtime. 
+
+Zod helps solve this problem, among others, by allowing us to define schemas and parse API responses using those schemas. This allows us to validate during runtime that the data we received from the API is what we were expecting so we can respond appropriately, whether that's by logging an error, showing a message to the user, or something else.
 
 ## Form Validation
 
-TODO: Explain schema validation with zod and Mantine forms
+Mantine provides a framework for building forms that we can combine with Zod to provide rich, declarative form validation. Since we use Zod for our models, in some cases we can use that model directly to drive the form validation rules. In other cases, the fields for a form may not match a model directly. In these cases, Zod should be used to define a form-specific schema in the same file as the form component. See `src/components/examples/users/user-form.tsx` for an example of using a schema to drive form validation.
 
 ## Styling
 
-In general, it's easiest to rely on Mantine components to handle common styling tasks. For example, the [Stack Component](https://mantine.dev/core/stack/) is useful to stack items vertically, while the [Group Component](https://mantine.dev/core/group/) is useful for aligning items horizontally. Mantine components are designed to property support theming and light/dark mode, as well as providing consistent values for things like padding and margin. Before resorting to using style attributes or CSS files to style components, check the Mantine library to see if what you're wanting to be accomplished can easily be achieved with an out-of-the-box component. If Mantine does not provide a way to properly style your component, [CSS modules](https://mantine.dev/styles/css-modules/) should be used.
+In general, it's easiest to rely on Mantine components to handle common styling tasks. For example, the [Stack Component](https://mantine.dev/core/stack/) is useful to stack items vertically, while the [Group Component](https://mantine.dev/core/group/) is useful for aligning items horizontally. Mantine components are designed to property support theming and light/dark mode, as well as providing consistent values for things like padding and margin. Before resorting to using style attributes or CSS files to style components, check the Mantine library to see if what you're wanting to do can easily be acomplished with an out-of-the-box component. If Mantine does not provide an easy way to properly style your component, [CSS modules](https://mantine.dev/styles/css-modules/) should be used.
 
 ## Recommended Extensions
 
-When the root project directory is opened in VSCode, you will see a notification to install recommended extensions. It is highly recommended to install these extensions because they will enable auto-formatting and linting to keep code style as consistent as possible. If code is pushed with lint errors, the CI/CD pipelines may fail and the lint error will need to be fixed. All recommended extensions are listed at `.vscode/extensions.json`.
+When the root project directory is opened in VSCode, you will see a notification to install recommended extensions. It is highly recommended to install these extensions because they enable auto-formatting and linting to keep code style as consistent as possible. If code is pushed with lint errors, the CI/CD pipelines may fail and the lint error will need to be fixed. All recommended extensions are listed at `.vscode/extensions.json`.
 
 ## Auto-formatting and Linting
 
