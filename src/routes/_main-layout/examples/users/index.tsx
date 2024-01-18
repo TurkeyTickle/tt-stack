@@ -1,5 +1,5 @@
 import UsersList from "@/components/examples/users/users-list";
-import { Box, Title } from "@mantine/core";
+import { Title } from "@mantine/core";
 import { FileRoute } from "@tanstack/react-router";
 
 export const Route = new FileRoute("/_main-layout/examples/users/").createRoute(

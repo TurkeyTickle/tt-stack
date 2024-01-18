@@ -56,9 +56,6 @@ TODO: Explain approach to styling components
 
 ## TODO
 
-- Form create example
-- Table example
 - App drawer state management
-- Figure out how to make sure form fields stay aligned when validation errors appear
 
 

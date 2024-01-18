@@ -19,6 +19,7 @@ function UsersList() {
 	return (
 		<DataTable
 			withTableBorder
+			minHeight={350}
 			columns={[
 				{ accessor: "id" },
 				{

@@ -1,3 +1,4 @@
+import { useAppStore } from "@/state/app.store";
 import {
 	AppShell,
 	Flex,
@@ -8,14 +9,7 @@ import {
 	Container,
 	useMantineColorScheme,
 } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
-import {
-	IconSun,
-	IconMoon,
-	IconHome,
-	IconNumber1,
-	IconNumber2,
-} from "@tabler/icons-react";
+import { IconSun, IconMoon, IconHome } from "@tabler/icons-react";
 import { FileRoute, Link, Outlet } from "@tanstack/react-router";
 
 export const Route = new FileRoute("/_main-layout").createRoute({
@@ -23,7 +17,7 @@ export const Route = new FileRoute("/_main-layout").createRoute({
 });
 
 function MainLayout() {
-	const [opened, { toggle }] = useDisclosure();
+	const { drawerOpen, toggleDrawer } = useAppStore();
 	const { toggleColorScheme, colorScheme } = useMantineColorScheme();
 
 	return (
@@ -32,13 +26,13 @@ function MainLayout() {
 			navbar={{
 				width: 300,
 				breakpoint: "sm",
-				collapsed: { mobile: !opened, desktop: !opened },
+				collapsed: { mobile: !drawerOpen, desktop: !drawerOpen },
 			}}
 			padding="md"
 		>
 			<AppShell.Header>
 				<Flex h="100%" px="md" align="center" justify="space-between" gap="md">
-					<Burger opened={opened} onClick={toggle} size="sm" />
+					<Burger opened={drawerOpen} onClick={toggleDrawer} size="sm" />
 					<ActionIcon variant="subtle" onClick={() => toggleColorScheme()}>
 						{colorScheme === "dark" ? <IconSun /> : <IconMoon />}
 					</ActionIcon>
@@ -53,17 +47,11 @@ function MainLayout() {
 						leftSection={<IconHome size="1rem" stroke={1.5} />}
 					/>
 					<NavLink href="#examples-parent-link" label="Examples" opened>
-						<NavLink
-							component={Link}
-							label="Users"
-							to="/examples/users"
-							leftSection={<IconNumber1 size="1rem" stroke={1.5} />}
-						/>
+						<NavLink component={Link} label="Users" to="/examples/users" />
 						<NavLink
 							component={Link}
 							label="Example Route 2"
 							to="/examples/two"
-							leftSection={<IconNumber2 size="1rem" stroke={1.5} />}
 						/>
 					</NavLink>
 				</Stack>
