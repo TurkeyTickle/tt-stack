@@ -9,74 +9,73 @@ import {
 import { useForm, zodResolver } from "@mantine/form";
 import { useEffect } from "react";
 import { notifications } from "@mantine/notifications";
-import { PostModel, postSchema } from "@/models/examples/post.model";
-import { useUpdatePostMutation } from "@/services/examples/posts.service";
+import { UserModel, userSchema } from "@/models/examples/user.model";
+import { useUpdateUserMutation } from "@/services/examples/users.service";
 
 interface Props {
-	post: PostModel;
+	user: UserModel;
 	onSaved: () => void;
 }
 
-function PostForm({ post, onSaved }: Props) {
-	const updatePostMutation = useUpdatePostMutation(post.id);
+function UserForm({ user, onSaved }: Props) {
+	const updateUserMutation = useUpdateUserMutation(user.id);
 
 	useEffect(() => {
-		if (updatePostMutation.isSuccess) {
+		if (updateUserMutation.isSuccess) {
 			notifications.show({
-				message: "Post successfully updated",
+				message: "User successfully updated",
 			});
 
 			onSaved?.();
 		}
-	}, [updatePostMutation.isSuccess, onSaved]);
+	}, [updateUserMutation.isSuccess, onSaved]);
 
 	const form = useForm({
-		initialValues: post,
-		validate: zodResolver(postSchema),
+		initialValues: user,
+		validate: zodResolver(userSchema),
 	});
 
 	return (
 		<form
 			onSubmit={form.onSubmit((values) => {
-				return updatePostMutation.mutate(values);
+				return updateUserMutation.mutate(values);
 			})}
 		>
 			<Fieldset
 				variant="unstyled"
 				w="100%"
-				disabled={updatePostMutation?.status === "pending"}
+				disabled={updateUserMutation?.status === "pending"}
 			>
 				<SimpleGrid cols={{ sm: 2 }}>
 					<NumberInput
 						withAsterisk
 						disabled
-						label="Post ID"
+						label="User ID"
 						{...form.getInputProps("id")}
 					/>
-					<NumberInput
+					<TextInput
 						withAsterisk
-						disabled
-						label="User ID"
-						{...form.getInputProps("userId")}
+						label="Email"
+						{...form.getInputProps("email")}
 					/>
 					<TextInput
 						withAsterisk
-						label="Title"
-						{...form.getInputProps("title")}
+						label="First Name"
+						{...form.getInputProps("first_name")}
 					/>
 					<TextInput
 						withAsterisk
-						label="Body"
-						{...form.getInputProps("body")}
+						label="Last Name"
+						{...form.getInputProps("last_name")}
 					/>
 				</SimpleGrid>
 			</Fieldset>
 			<Group justify="flex-end" mt="xl">
 				<Button
 					type="submit"
-					loading={updatePostMutation?.status === "pending"}
+					loading={updateUserMutation?.status === "pending"}
 					loaderProps={{ type: "dots" }}
-					disabled={updatePostMutation?.status === "pending"}
+					disabled={updateUserMutation?.status === "pending"}
 				>
 					Save
 				</Button>
@@ -85,4 +84,4 @@ function PostForm({ post, onSaved }: Props) {
 	);
 }
 
-export default PostForm;
+export default UserForm;
