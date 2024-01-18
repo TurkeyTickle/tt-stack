@@ -16,7 +16,7 @@ TurkeyTickle Stack is a prescriptive, opinionated project template for a front-e
 - TanStack Query ([Docs](https://tanstack.com/query/latest/docs/react/overview)) - API-sourced data state management
 - Axios ([Docs](https://axios-http.com/docs/intro)) - HTTP
 - TanStack Router ([Docs](https://tanstack.com/router)) - Routing
-- 
+
 ## Project Structure
 
 The root directory contains several configuration files:
@@ -38,32 +38,82 @@ The `src` directory is where the main app code lives, and contains several subdi
 - `services` - Contains groups of functions that call API endpoints and return data. See [API Queries](#API Queries) section for more info.
 - `state` - Contains client-side state management stores. For example, `src/state/app.store.ts` contains a store that saves and retrieves whether the app drawer on the main layout is open or closed from browser local storage.
 - `theme` - Contains files related to Mantine theme customization.
-- 
+
 ## Debugging (VS Code)
 
-TODO: Explain default debug/build configuration
+The `.vscode` directory contains `launch.json` and `tasks.json` files that tell VS Code how to build the application and launch the application in a browser window that can be debugged directly from VS Code. To run the dev server and launch a debuggable browser window, go to the `Run and Debug` tab in the sidebar in VSCode, select either `Debug Client (Edge)` or `Debug Client (Chrome)`,  then press the `F5` key. You should now be able to set breakpoints in React code in VS Code.
+
+If you don't need a debugger and would rather just start the dev server and open the page in a browser manually, you can run the default build task by pressing `ctrl+shift+b` (windows) or `cmd+shift+b` (mac), or you can run the `pnpm run dev` command from a terminal at the project root.
 
 ## Components
 
- Note that none of the components within this directory should map directly to a URL route. These are components that are meant to be used from *within* route components, so if these components require things like IDs that come from the route, they should be passed in as props. 
+ All components that do not map directly to a URL route belong in the `routes` directory. These are components that are meant to be used from *within* route components, so a component requires things like a ID that comes from the route, that ID should be passed into the component as a prop. When a route component needs to be able to respond to an action that occurs within the component, a function prop should be passed from the route component to the shared component and called when the event occurs so the route component can respond appropriately. See the simplified examples below or `src/components/examples/users/user-form.tsx` for a more detailed example.
+### Shared component example
+```tsx
+interface Props {
+	user: UserModel;
+	onSaved: () => void;
+}
  
-TODO: Explain library choice motivation
+function UserForm({ user, onSaved }: Props) {
+	return (
+		//...omitted form fields
+		<Button onClick={() => onSaved()}>Save</Button>
+	)
+}
+```
+### Usage in route component 
+```tsx
+<UserForm
+	user={user}
+	onSaved={() => navigate({ to: "/examples/users" })}
+/>
+```
 
 ## Routing
 
-TODO: Explain file based routing using vite plugin and route generation.
+### File-based Routing Strategy
+
+Page routes are handled by TanStack Router using a file-based strategy. This means that application routes in the URL almost directly match the structure of the files in the `src/routes` directory. See this section of the [TanStack Router](https://tanstack.com/router/v1/docs/guide/file-based-routing#file-naming-conventions) documentation for details on route file naming conventions.
+
+### Route Loaders
+
+When possible, TanStack Router should be combined with TanStack Query to retrieve data from an API that is required to fully load the page as part of the navigation process. This can be accomplished by providing the route with a "loader" function. See `src/routes/_main-layout/examples/users/$userId.index.tsx` for a detailed example of this. To help explain the benefits of this approach, consider the following example.
+
+When editing a user, the application flow usually goes something like this:
+
+1. The user selects an item from a list
+2. The user clicks an "edit" button
+3. The application navigates to the edit route and renders the edit form
+4. The application queries the API for the item's details, showing the user a spinner
+5. The application populates the form with the result from the API
+
+The combination of TanStack Router/Query provides the ability to do the last three steps in parallel, making the application feel much more responsive. In some cases, the route's data can even be prefetched when the user hovers over the "edit record" button, which can result essentially zero perceptible load time when the user clicks the button.
+
+This is purely a UX optimization and may not always be worth implementing, but in some cases it's an easy win and should be considered on a case-by-case basis. 
+
+When running the application in local development mode, the TanStack Router DevTools will appear in the bottom right corner of the page. These dev tools can be used to view the full route tree and information about each route. These dev tools are excluded from UAT and Prod builds.
 
 ## API Queries
 
-TODO: Explain basic use of TanStack Query
+API requests are handled with a combination of TanStack Query and Axios. Axios is responsible for the actual HTTP request, while TanStack Query sits on top providing things like result caching, retries, and exponential backoff.
+### Axios
+
+All API requests should use the Axios instance that is exported from `src/axios-instance.ts`. This instance provides standard request configuration and important interceptors that can do things like automatically redirect to a login page if a session expires, or display a toast notification telling the user that something went wrong when an API request fails.
+
+### TanStack Query
+
+TanStack Query provides two primary React hooks - `useQuery` and `useMutation`. Examples of the use of both of these hooks can be found at `src/routes/_main-layout/examples/users/index.tsx` and `src/routes/_main-layout/examples/users/$userId.index.tsx`. Both hooks provide caching, retries, and exponential backoff by default, but can be overridden as needed. 
+
+When running the application in a local development environment, the TanStack Query DevTools will appear in the bottom-left corner of the page. These dev tools can be used to monitor the status of all queries and mutations, and to do helpful things like invalidate caches. These dev tools are excluded from UAT and Prod builds.
 
 ## Models
 
-TODO: Explain models (zod)
+TODO: Explain models with zod
 
 ## Form Validation
 
-TODO: Explain schema validation
+TODO: Explain schema validation with zod and Mantine forms
 
 ## Styling
 
@@ -76,5 +126,3 @@ When the root project directory is opened in VSCode, you will see a notification
 ## Auto-formatting and Linting
 
 If the recommended formatting and linting VSCode extensions are installed, all code will be constantly checked for lint errors, and files will be automatically formatted on save. The linting rules mostly come from a ["recommended" set of rules from Biome](https://biomejs.dev/linter/rules/), but can easily be modified based on team preferences.
-
-## TODO
