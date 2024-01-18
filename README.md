@@ -44,7 +44,7 @@ TODO: Explain approach to styling components
 - Vite ([Docs](https://vitejs.dev/)) - Build tool, HMR
 - React ([Docs](https://react.dev/)) - UI Framework
 - Mantine ([Docs](https://mantine.dev/) ) - UI Components
-- Mantine React Table ([Docs](https://v2.mantine-react-table.com/)) - Data tables
+- Mantine DataTable ([Docs](https://icflorescu.github.io/mantine-datatable/)) - Data tables
 - Tabler Icons ([Docs](https://tabler.io/docs/getting-started)) - Icons
 - Biome ([Docs](https://biomejs.dev/)) - Formatting, Linting
 - Zod ([Docs](https://zod.dev/)) - Schema validation for models and forms

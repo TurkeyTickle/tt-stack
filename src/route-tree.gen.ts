@@ -4,8 +4,8 @@ import { Route as BlankLayoutImport } from "./routes/_blank-layout"
 import { Route as MainLayoutIndexImport } from "./routes/_main-layout/index"
 import { Route as BlankLayoutLoginImport } from "./routes/_blank-layout/login"
 import { Route as MainLayoutExamplesTwoImport } from "./routes/_main-layout/examples/two"
-import { Route as MainLayoutExamplesPostsIndexImport } from "./routes/_main-layout/examples/posts/index"
-import { Route as MainLayoutExamplesPostsPostIdIndexImport } from "./routes/_main-layout/examples/posts/$postId.index"
+import { Route as MainLayoutExamplesUsersIndexImport } from "./routes/_main-layout/examples/users/index"
+import { Route as MainLayoutExamplesUsersUserIdIndexImport } from "./routes/_main-layout/examples/users/$userId.index"
 
 const MainLayoutRoute = MainLayoutImport.update({
   id: "/_main-layout",
@@ -32,15 +32,15 @@ const MainLayoutExamplesTwoRoute = MainLayoutExamplesTwoImport.update({
   getParentRoute: () => MainLayoutRoute,
 } as any)
 
-const MainLayoutExamplesPostsIndexRoute =
-  MainLayoutExamplesPostsIndexImport.update({
-    path: "/examples/posts/",
+const MainLayoutExamplesUsersIndexRoute =
+  MainLayoutExamplesUsersIndexImport.update({
+    path: "/examples/users/",
     getParentRoute: () => MainLayoutRoute,
   } as any)
 
-const MainLayoutExamplesPostsPostIdIndexRoute =
-  MainLayoutExamplesPostsPostIdIndexImport.update({
-    path: "/examples/posts/$postId/",
+const MainLayoutExamplesUsersUserIdIndexRoute =
+  MainLayoutExamplesUsersUserIdIndexImport.update({
+    path: "/examples/users/$userId/",
     getParentRoute: () => MainLayoutRoute,
   } as any)
 declare module "@tanstack/react-router" {
@@ -65,12 +65,12 @@ declare module "@tanstack/react-router" {
       preLoaderRoute: typeof MainLayoutExamplesTwoImport
       parentRoute: typeof MainLayoutImport
     }
-    "/_main-layout/examples/posts/": {
-      preLoaderRoute: typeof MainLayoutExamplesPostsIndexImport
+    "/_main-layout/examples/users/": {
+      preLoaderRoute: typeof MainLayoutExamplesUsersIndexImport
       parentRoute: typeof MainLayoutImport
     }
-    "/_main-layout/examples/posts/$postId/": {
-      preLoaderRoute: typeof MainLayoutExamplesPostsPostIdIndexImport
+    "/_main-layout/examples/users/$userId/": {
+      preLoaderRoute: typeof MainLayoutExamplesUsersUserIdIndexImport
       parentRoute: typeof MainLayoutImport
     }
   }
@@ -80,7 +80,7 @@ export const routeTree = rootRoute.addChildren([
   MainLayoutRoute.addChildren([
     MainLayoutIndexRoute,
     MainLayoutExamplesTwoRoute,
-    MainLayoutExamplesPostsIndexRoute,
-    MainLayoutExamplesPostsPostIdIndexRoute,
+    MainLayoutExamplesUsersIndexRoute,
+    MainLayoutExamplesUsersUserIdIndexRoute,
   ]),
 ])

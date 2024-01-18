@@ -55,8 +55,8 @@ function MainLayout() {
 					<NavLink href="#examples-parent-link" label="Examples" opened>
 						<NavLink
 							component={Link}
-							label="Posts"
-							to="/examples/posts"
+							label="Users"
+							to="/examples/users"
 							leftSection={<IconNumber1 size="1rem" stroke={1.5} />}
 						/>
 						<NavLink
