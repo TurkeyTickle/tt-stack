@@ -5,12 +5,14 @@ import { useQuery } from "@tanstack/react-query";
 import { DataTable } from "mantine-datatable";
 import { Avatar } from "@mantine/core";
 import { useState } from "react";
-import { useNavigate } from "@tanstack/react-router";
 
 const PAGE_SIZE = 5;
 
-function UsersList() {
-	const navigate = useNavigate();
+interface Props {
+	onUserSelected: (user: UserModel) => void;
+}
+
+function UsersList({ onUserSelected }: Props) {
 	const [page, setPage] = useState(1);
 	const { data, isFetching } = useQuery<PaginatedResponseModel<UserModel>>(
 		usersQueryOptions(page, PAGE_SIZE),
@@ -37,12 +39,7 @@ function UsersList() {
 			onPageChange={(p) => setPage(p)}
 			fetching={isFetching}
 			loaderType="dots"
-			onRowClick={(row) =>
-				navigate({
-					to: "/examples/users/$userId",
-					params: { userId: row.record.id },
-				})
-			}
+			onRowClick={(row) => onUserSelected(row.record)}
 		/>
 	);
 }

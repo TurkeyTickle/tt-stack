@@ -23,7 +23,9 @@ function UserForm({ user, onSaved }: Props) {
 	useEffect(() => {
 		if (updateUserMutation.isSuccess) {
 			notifications.show({
-				message: "User successfully updated",
+				title: "User updated",
+				message:
+					"NOTE: this is mock data, so you will not see changes reflected in the Users list.",
 			});
 
 			onSaved?.();

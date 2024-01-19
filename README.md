@@ -35,7 +35,7 @@ The `src` directory is where the main app code lives, and contains several subdi
 - `components` - All reusable components. See the [Components](#Components) section for more info.
 - `models` - Data models and enums. See the [Models](#Models) section for more info the modeling approach.
 - `routes` - Contains "route" components. In general, each file in this directory maps directly to a URL route, but it also contains certain files like layout files (prefixed with a single underscore). See the [Routing](#Routing) section for more info.
-- `services` - Contains groups of functions that call API endpoints and return data. See [API Queries](#API Queries) section for more info.
+- `services` - Contains groups of functions that call API endpoints and return data. See [API Queries](<#API Queries>) section for more info.
 - `state` - Contains client-side state management stores. For example, `src/state/app.store.ts` contains a store that saves and retrieves whether the app drawer on the main layout is open or closed from browser local storage.
 - `theme` - Contains files related to Mantine theme customization.
 
@@ -43,15 +43,15 @@ The `src` directory is where the main app code lives, and contains several subdi
 
 The `.vscode` directory contains `launch.json` and `tasks.json` files that tell VS Code how to build the application and launch the application in a browser window that can be debugged directly from VS Code. To run the dev server and launch a debuggable browser window, go to the `Run and Debug` tab in the sidebar in VSCode, select either `Debug Client (Edge)` or `Debug Client (Chrome)`,  then press the `F5` key. You should now be able to set breakpoints in React code in VS Code.
 
-If you don't need a debugger and would rather just start the dev server and open the page in a browser manually, you can run the default build task by pressing `ctrl+shift+b` (windows) or `cmd+shift+b` (mac), or you can run the `pnpm run dev` command from a terminal at the project root.
+If you don't need a debugger and would rather just start the dev server and open the page in a browser manually, you can run the default build task by pressing `ctrl+shift+b` (windows) or `cmd+shift+b` (mac), or you can run the `pnpm run dev` command from a terminal at the project root. Both methods run the same command.
 
 Either way, as long as the `pnpm run dev` command is running, Vite will hot reload the browser tab whenever changes are saved.
 
 ## Components
 
- All components that do not map directly to a URL route belong in the `routes` directory. These are components that are meant to be used from *within* route components, so a component requires things like a ID that comes from the route, that ID should be passed into the component as a prop. When a route component needs to be able to respond to an action that occurs within the component, a function prop should be passed from the route component to the shared component and called when the event occurs so the route component can respond appropriately. See the simplified examples below or `src/components/examples/users/user-form.tsx` for a more detailed example.
+ All components that do not map directly to a URL route belong in the `src/components` directory. These are components that are meant to be used from *within* route components, so if a component requires something like an ID that comes from the route, (for example `/users/5`) that ID should be passed into the component as a prop. When a *route* component needs to be able to respond to an action that occurs within a *non-route* component, a function prop should be passed from the route component to the non-route component and called when the event occurs so the route component can respond appropriately. See the simplified examples below or `src/components/examples/users/user-form.tsx` for a more detailed example.
 
-### Shared component example
+### Non-route component example
 
 ```tsx
 interface Props {
@@ -80,13 +80,15 @@ function UserForm({ user, onSaved }: Props) {
 
 ### File-based Routing Strategy
 
-Page routes are handled by TanStack Router using a file-based strategy. This means that application routes in the URL almost directly match the structure of the files in the `src/routes` directory. See this section of the [TanStack Router](https://tanstack.com/router/v1/docs/guide/file-based-routing#file-naming-conventions) documentation for details on route file naming conventions.
+Page routes are handled by TanStack Router using a file-based routin strategy. This means that application routes in the URL almost directly match the structure of the files in the `src/routes` directory. See this section of the [TanStack Router](https://tanstack.com/router/v1/docs/guide/file-based-routing#file-naming-conventions) documentation for details on route file naming conventions.
+
+When running the application in development mode, the TanStack Router DevTools will appear in the bottom right corner of the page. These dev tools can be used to view the full route tree and information about each route. These dev tools are excluded from UAT and Prod builds.
 
 ### Route Loaders
 
 When possible, TanStack Router should be combined with TanStack Query to retrieve data from an API that is required to fully load the page as part of the navigation process. This can be accomplished by providing the route with a "loader" function. See `src/routes/_main-layout/examples/users/$userId.index.tsx` for a detailed example of this. To help explain the benefits of this approach, consider the following example.
 
-When editing a user, the application flow usually goes something like this:
+When editing a record from some list of items, the application flow usually goes something like this:
 
 1. The user selects an item from a list
 2. The user clicks an "edit" button
@@ -97,8 +99,6 @@ When editing a user, the application flow usually goes something like this:
 The combination of TanStack Router/Query provides the ability to essentially do the last three steps in parallel, making the application feel much more responsive. In some cases, the route's data can even be prefetched when the user hovers over the "edit record" button, which can result essentially zero perceptible load time when the user clicks the button.
 
 This is purely a UX optimization and may not always be worth implementing, but in some cases it's an easy win and should be considered on a case-by-case basis. 
-
-When running the application in local development mode, the TanStack Router DevTools will appear in the bottom right corner of the page. These dev tools can be used to view the full route tree and information about each route. These dev tools are excluded from UAT and Prod builds.
 
 ## API Queries
 
@@ -126,7 +126,7 @@ Mantine provides a framework for building forms that we can combine with Zod to 
 
 ## Styling
 
-In general, it's easiest to rely on Mantine components to handle common styling tasks. For example, the [Stack Component](https://mantine.dev/core/stack/) is useful to stack items vertically, while the [Group Component](https://mantine.dev/core/group/) is useful for aligning items horizontally. Mantine components are designed to property support theming and light/dark mode, as well as providing consistent values for things like padding and margin. Before resorting to using style attributes or CSS files to style components, check the Mantine library to see if what you're wanting to do can easily be acomplished with an out-of-the-box component. If Mantine does not provide an easy way to properly style your component, [CSS modules](https://mantine.dev/styles/css-modules/) should be used.
+In general, it's easiest to rely on Mantine components to provide out-of-the-box styling. For example, the [Stack Component](https://mantine.dev/core/stack/) is useful to stack items vertically, while the [Group Component](https://mantine.dev/core/group/) is useful for aligning items horizontally. Mantine components are designed to property support theming and light/dark mode, as well as providing consistent values for things like padding and margins. Before resorting to using style attributes or CSS files to style components, check the Mantine library to see if what you're trying to do can easily be acomplished with an out-of-the-box component. If Mantine does not provide an easy way to properly style your component, [CSS modules](https://mantine.dev/styles/css-modules/) should be used.
 
 ## Recommended Extensions
 
