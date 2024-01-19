@@ -6,7 +6,6 @@ import { queryOptions, useMutation } from "@tanstack/react-query";
 const baseUrl = `${import.meta.env.VITE_EXAMPLE_API_URL}/users`;
 
 // GET /users
-
 const getUsers = async (page: number, limit: number) =>
   await axiosInstance
     .get(`${baseUrl}?page=${page}&per_page=${limit}`)
@@ -16,6 +15,7 @@ export const usersQueryOptions = (page: number, limit: number) => queryOptions<P
   queryKey: ['users', { page, limit }],
   queryFn: () => getUsers(page, limit)
 })
+
 
 // GET /user/$id
 const getUser = async (id: number) =>
@@ -30,6 +30,7 @@ export const userQueryOptions = (id: number) => queryOptions<UserModel>({
   queryKey: ['users', { id }],
   queryFn: () => getUser(id)
 })
+
 
 // PATCH /user/$id
 export const useUpdateUserMutation = (userId: number) => useMutation({
