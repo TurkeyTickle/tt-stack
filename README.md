@@ -10,7 +10,7 @@ TurkeyTickle Stack is a prescriptive, opinionated project template for a front-e
 - Mantine ([Docs](https://mantine.dev/) ) - UI Components
 - Mantine DataTable ([Docs](https://icflorescu.github.io/mantine-datatable/)) - Data tables
 - Tabler Icons ([Docs](https://tabler.io/docs/getting-started)) - Icons
-- Biome ([Docs](https://biomejs.dev/)) - Formatting, Linting
+- ESLint ([Docs](https://eslint.org/)) - Formatting, Linting
 - Zod ([Docs](https://zod.dev/)) - Schema validation for models and forms
 - Zustand ([Docs](https://zustand-demo.pmnd.rs/)) - App state management
 - TanStack Query ([Docs](https://tanstack.com/query/latest/docs/react/overview)) - API-sourced data state management
@@ -21,8 +21,8 @@ TurkeyTickle Stack is a prescriptive, opinionated project template for a front-e
 
 The root directory contains several configuration files:
 
-- `.editorconfig` (EditorConfig configuration) - Enforces consistent indenting and line endings with the help of the EditorConfig VSCode extension (included in [recommended extensions](#Recommended Extensions))
-- `biome.json` (Biome configuration) - Automatically formats and lints code with the help of the Biome VSCode extensions (included in [recommended extensions](#Recommended Extensions))
+- `.editorconfig` (EditorConfig configuration) - Enforces consistent indenting and line endings with the help of the EditorConfig VSCode extension (included in [recommended extensions](<#Recommended Extensions>))
+- `eslintrc.json` (ESLint configuration) - Automatically formats and lints code with the help of the ESLint VSCode extension (included in [recommended extensions](<#Recommended Extensions>))
 - `postcss.config.cjs` (PostCSS configuration) - Required by Mantine and defines responsive breakpoint CSS variables. These can be modified based on project needs.
 - `tsr.config.json` (TanStack Router Vite extension configuration) - While the Vite dev server is running and watching for file changes (`pnpm run dev`), the TanStack Router Vite extension watches the `src/routes` directory for changes and automatically regenerates the `src/route-tree.gen.ts` file. This generated file defines all page routes for the application, and provides type-safety for route paths. See the [routing section](#Routing) for more information on the file-based routing approach.
 - `tsconfig.json` and `tsconfig.vite.json` (TypeScript configuration) - Defines several settings that are required for Vite/React, but also includes TypeScript strictness rules. A full list of rules and what they mean can be found [here](https://www.typescriptlang.org/tsconfig).
@@ -84,22 +84,6 @@ Page routes are handled by TanStack Router using a file-based routin strategy. T
 
 When running the application in development mode, the TanStack Router DevTools will appear in the bottom right corner of the page. These dev tools can be used to view the full route tree and information about each route. These dev tools are excluded from UAT and Prod builds.
 
-### Route Loaders
-
-When possible, TanStack Router should be combined with TanStack Query to retrieve data from an API that is required to fully load the page as part of the navigation process. This can be accomplished by providing the route with a "loader" function. See `src/routes/_main-layout/examples/users/$userId.index.tsx` for a detailed example of this. To help explain the benefits of this approach, consider the following example.
-
-When editing a record from some list of items, the application flow usually goes something like this:
-
-1. The user selects an item from a list
-2. The user clicks an "edit" button
-3. The application navigates to the edit route and renders the edit form
-4. The application queries the API for the item's details, showing the user a spinner
-5. The application populates the form with the result from the API
-
-The combination of TanStack Router/Query provides the ability to essentially do the last three steps in parallel, making the application feel much more responsive. In some cases, the route's data can even be prefetched when the user hovers over the "edit record" button, which can result essentially zero perceptible load time when the user clicks the button.
-
-This is purely a UX optimization and may not always be worth implementing, but in some cases it's an easy win and should be considered on a case-by-case basis. 
-
 ## API Queries
 
 API requests are handled with a combination of TanStack Query and Axios. Axios is responsible for the actual HTTP request, while TanStack Query sits on top providing things like result caching, retries, and exponential backoff.
@@ -134,4 +118,4 @@ When the root project directory is opened in VSCode, you will see a notification
 
 ## Auto-formatting and Linting
 
-If the recommended formatting and linting VSCode extensions are installed, all code will be constantly checked for lint errors, and files will be automatically formatted on save. The linting rules mostly come from a ["recommended" set of rules from Biome](https://biomejs.dev/linter/rules/), but can easily be modified based on team preferences.
+If the recommended formatting and linting VSCode extensions are installed, all code will be constantly checked for lint errors, and files will be automatically formatted on save. The linting rules mostly come from a recommended set for React and Typescript with minor modifications.
