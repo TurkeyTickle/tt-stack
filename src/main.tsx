@@ -16,12 +16,12 @@ import "mantine-datatable/styles.layer.css";
 const queryClient = new QueryClient();
 
 const router = new Router({
-	routeTree,
-	context: {
-		queryClient,
-	},
-	defaultPreload: "intent",
-	defaultPreloadStaleTime: 0,
+  routeTree,
+  context: {
+    queryClient,
+  },
+  defaultPreload: "intent",
+  defaultPreloadStaleTime: 0,
 });
 
 declare module "@tanstack/react-router" {
@@ -32,12 +32,12 @@ declare module "@tanstack/react-router" {
 
 // biome-ignore lint/style/noNonNullAssertion: <explanation>
 ReactDOM.createRoot(document.getElementById("root")!).render(
-	<React.StrictMode>
-		<QueryClientProvider client={queryClient}>
-			<MantineProvider theme={theme}>
-				<RouterProvider router={router} />
-				<Notifications />
-			</MantineProvider>
-		</QueryClientProvider>
-	</React.StrictMode>,
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <MantineProvider theme={theme}>
+        <RouterProvider router={router} />
+        <Notifications />
+      </MantineProvider>
+    </QueryClientProvider>
+  </React.StrictMode>,
 );

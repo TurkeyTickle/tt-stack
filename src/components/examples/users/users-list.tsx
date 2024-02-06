@@ -13,35 +13,35 @@ interface Props {
 }
 
 function UsersList({ onUserSelected }: Props) {
-	const [page, setPage] = useState(1);
-	const { data, isFetching } = useQuery<PaginatedResponseModel<UserModel>>(
-		usersQueryOptions(page, PAGE_SIZE),
-	);
+  const [page, setPage] = useState(1);
+  const { data, isFetching } = useQuery<PaginatedResponseModel<UserModel>>(
+    usersQueryOptions(page, PAGE_SIZE),
+  );
 
-	return (
-		<DataTable
-			withTableBorder
-			minHeight={350}
-			columns={[
-				{ accessor: "id" },
-				{
-					accessor: "avatar",
-					render: (record) => <Avatar src={record.avatar} />,
-				},
-				{ accessor: "first_name" },
-				{ accessor: "last_name" },
-				{ accessor: "email" },
-			]}
-			records={data?.data ?? []}
-			totalRecords={data?.total}
-			page={page}
-			recordsPerPage={PAGE_SIZE}
-			onPageChange={(p) => setPage(p)}
-			fetching={isFetching}
-			loaderType="dots"
-			onRowClick={(row) => onUserSelected(row.record)}
-		/>
-	);
+  return (
+    <DataTable
+      withTableBorder
+      minHeight={350}
+      columns={[
+        { accessor: "id" },
+        {
+          accessor: "avatar",
+          render: (record) => <Avatar src={record.avatar} />,
+        },
+        { accessor: "first_name" },
+        { accessor: "last_name" },
+        { accessor: "email" },
+      ]}
+      records={data?.data ?? []}
+      totalRecords={data?.total}
+      page={page}
+      recordsPerPage={PAGE_SIZE}
+      onPageChange={(p) => setPage(p)}
+      fetching={isFetching}
+      loaderType="dots"
+      onRowClick={(row) => onUserSelected(row.record)}
+    />
+  );
 }
 
 export default UsersList;

@@ -1,14 +1,14 @@
 import { Title } from "@mantine/core";
-import { FileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = new FileRoute("/_main-layout/").createRoute({
-	component: HomeRoute,
+export const Route = createFileRoute("/_main-layout/")({
+  component: HomeRoute,
 });
 
 function HomeRoute() {
-	return (
-		<div className="p-2">
-			<Title>Home</Title>
-		</div>
-	);
+  return (
+    <div className="p-2">
+      <Title>Home</Title>
+    </div>
+  );
 }

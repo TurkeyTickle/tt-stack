@@ -18,7 +18,7 @@ axiosInstance.interceptors.request.use(
     notifications.show({
       title: "Error",
       message: error.Error
-    })
+    });
 
     return Promise.reject(error);
   }
@@ -34,7 +34,7 @@ axiosInstance.interceptors.response.use(
     notifications.show({
       title: "Error",
       message: error.error
-    })
+    });
 
     return Promise.reject(error);
   }

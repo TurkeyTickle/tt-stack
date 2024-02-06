@@ -8,7 +8,7 @@ export const paginatedResponseSchema = <TItem extends ZodType>(itemSchema: TItem
     total_pages: z.number(),
     data: z.array(itemSchema)
   });
-}
+};
 
 type PaginatedResponseType<TItem extends ZodType> = ReturnType<typeof paginatedResponseSchema<TItem>>
 

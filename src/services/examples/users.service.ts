@@ -9,12 +9,12 @@ const baseUrl = `${import.meta.env.VITE_EXAMPLE_API_URL}/users`;
 const getUsers = async (page: number, limit: number) =>
   await axiosInstance
     .get(`${baseUrl}?page=${page}&per_page=${limit}`)
-    .then(r => paginatedResponseSchema(userSchema).parse(r.data))
+    .then(r => paginatedResponseSchema(userSchema).parse(r.data));
 
 export const usersQueryOptions = (page: number, limit: number) => queryOptions<PaginatedResponseModel<UserModel>>({
-  queryKey: ['users', { page, limit }],
+  queryKey: ["users", { page, limit }],
   queryFn: () => getUsers(page, limit)
-})
+});
 
 
 // GET /user/$id
@@ -22,14 +22,14 @@ const getUser = async (id: number) =>
   await axiosInstance
     .get(`${baseUrl}/${id}`)
     .then((r) => {
-      console.log('test', r);
+      console.log("test", r);
       return userSchema.parse(r.data.data);
-    })
+    });
 
 export const userQueryOptions = (id: number) => queryOptions<UserModel>({
-  queryKey: ['users', { id }],
+  queryKey: ["users", { id }],
   queryFn: () => getUser(id)
-})
+});
 
 
 // PATCH /user/$id
@@ -39,4 +39,4 @@ export const useUpdateUserMutation = (userId: number) => useMutation({
     await axiosInstance
       .patch(`${baseUrl} / ${user.id}`, user)
       .then(r => userSchema.parse(r.data))
-})
+});
