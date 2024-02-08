@@ -10,14 +10,14 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as MainLayoutImport } from "./routes/_main-layout"
-import { Route as BlankLayoutImport } from "./routes/_blank-layout"
-import { Route as MainLayoutIndexImport } from "./routes/_main-layout/index"
-import { Route as BlankLayoutLoginImport } from "./routes/_blank-layout/login"
-import { Route as MainLayoutExamplesTwoImport } from "./routes/_main-layout/examples/two"
-import { Route as MainLayoutExamplesUsersIndexImport } from "./routes/_main-layout/examples/users/index"
-import { Route as MainLayoutExamplesUsersUserIdIndexImport } from "./routes/_main-layout/examples/users/$userId.index"
+import { Route as rootRoute } from './../routes/__root'
+import { Route as MainLayoutImport } from "./../routes/_main-layout"
+import { Route as BlankLayoutImport } from "./../routes/_blank-layout"
+import { Route as MainLayoutIndexImport } from "./../routes/_main-layout/index"
+import { Route as BlankLayoutLoginImport } from "./../routes/_blank-layout/login"
+import { Route as MainLayoutExamplesTwoImport } from "./../routes/_main-layout/examples/two"
+import { Route as MainLayoutExamplesUsersIndexImport } from "./../routes/_main-layout/examples/users/index"
+import { Route as MainLayoutExamplesUsersUserIdIndexImport } from "./../routes/_main-layout/examples/users/$userId.index"
 
 // Create/Update Routes
 

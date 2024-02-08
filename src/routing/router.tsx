@@ -1,6 +1,6 @@
 import { QueryClient } from "@tanstack/react-query";
 import { createRouter } from "@tanstack/react-router";
-import RouteLoader from "./components/common/route-loader";
+import RouteLoader from "../components/common/route-loader";
 import { routeTree } from "./route-tree.gen";
 
 export const queryClient = new QueryClient();
