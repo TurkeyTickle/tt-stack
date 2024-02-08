@@ -1,15 +1,15 @@
+import { PaginatedResponseModel } from "@/models/examples/paged-result.model";
 import { UserModel } from "@/models/examples/user.model";
 import { usersQueryOptions } from "@/services/examples/users.service";
-import { PaginatedResponseModel } from "@/models/examples/paged-result.model";
+import { Avatar } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { DataTable } from "mantine-datatable";
-import { Avatar } from "@mantine/core";
 import { useState } from "react";
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 10;
 
 interface Props {
-	onUserSelected: (user: UserModel) => void;
+  onUserSelected: (user: UserModel) => void;
 }
 
 function UsersList({ onUserSelected }: Props) {

@@ -1,8 +1,7 @@
 import { notifications } from "@mantine/notifications";
 import axios from "axios";
 
-export const axiosInstance = axios.create({
-});
+export const axiosInstance = axios.create();
 
 axiosInstance.interceptors.request.use(
   (request) => {
@@ -17,7 +16,7 @@ axiosInstance.interceptors.request.use(
 
     notifications.show({
       title: "Error",
-      message: error.Error
+      message: error
     });
 
     return Promise.reject(error);
@@ -33,7 +32,7 @@ axiosInstance.interceptors.response.use(
   (error) => {
     notifications.show({
       title: "Error",
-      message: error.error
+      message: error
     });
 
     return Promise.reject(error);
