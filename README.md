@@ -4,13 +4,13 @@ TurkeyTickle Stack is a prescriptive, opinionated project template for a front-e
 
 ## Key Dependencies
 
-- pnpm ([Docs](https://pnpm.io/installation)) - Package manager
+- Bun ([Docs](https://bun.sh/docs)) - Package manager
 - Vite ([Docs](https://vitejs.dev/)) - Build tool, HMR
 - React ([Docs](https://react.dev/)) - UI Framework
 - Mantine ([Docs](https://mantine.dev/) ) - UI Components
 - Mantine DataTable ([Docs](https://icflorescu.github.io/mantine-datatable/)) - Data tables
 - Tabler Icons ([Docs](https://tabler.io/docs/getting-started)) - Icons
-- ESLint ([Docs](https://eslint.org/)) - Formatting, Linting
+- Biome ([Docs](https://biomejs.dev/)) - Formatting, Linting
 - Zod ([Docs](https://zod.dev/)) - Schema validation for models and forms
 - Zustand ([Docs](https://zustand-demo.pmnd.rs/)) - App state management
 - TanStack Query ([Docs](https://tanstack.com/query/latest/docs/react/overview)) - API-sourced data state management
@@ -22,7 +22,7 @@ TurkeyTickle Stack is a prescriptive, opinionated project template for a front-e
 The root directory contains several configuration files:
 
 - `.editorconfig` (EditorConfig configuration) - Enforces consistent indenting and line endings with the help of the EditorConfig VSCode extension (included in [recommended extensions](<#Recommended Extensions>))
-- `eslintrc.json` (ESLint configuration) - Automatically formats and lints code with the help of the ESLint VSCode extension (included in [recommended extensions](<#Recommended Extensions>))
+- `biome.json` (Biome configuration) - Automatically formats and lints code with the help of the Biome VSCode extension (included in [recommended extensions](<#Recommended Extensions>))
 - `postcss.config.cjs` (PostCSS configuration) - Required by Mantine and defines responsive breakpoint CSS variables. These can be modified based on project needs.
 - `tsr.config.json` (TanStack Router Vite extension configuration) - While the Vite dev server is running and watching for file changes (`pnpm run dev`), the TanStack Router Vite extension watches the `src/routes` directory for changes and automatically regenerates the `src/route-tree.gen.ts` file. This generated file defines all page routes for the application, and provides type-safety for route paths. See the [routing section](#Routing) for more information on the file-based routing approach.
 - `tsconfig.json` and `tsconfig.vite.json` (TypeScript configuration) - Defines several settings that are required for Vite/React, but also includes TypeScript strictness rules. A full list of rules and what they mean can be found [here](https://www.typescriptlang.org/tsconfig).
