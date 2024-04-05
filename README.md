@@ -24,7 +24,7 @@ The root directory contains several configuration files:
 - `.editorconfig` (EditorConfig configuration) - Enforces consistent indenting and line endings with the help of the EditorConfig VSCode extension (included in [recommended extensions](<#Recommended Extensions>))
 - `biome.json` (Biome configuration) - Automatically formats and lints code with the help of the Biome VSCode extension (included in [recommended extensions](<#Recommended Extensions>))
 - `postcss.config.cjs` (PostCSS configuration) - Required by Mantine and defines responsive breakpoint CSS variables. These can be modified based on project needs.
-- `tsr.config.json` (TanStack Router Vite extension configuration) - While the Vite dev server is running and watching for file changes (`pnpm run dev`), the TanStack Router Vite extension watches the `src/routes` directory for changes and automatically regenerates the `src/route-tree.gen.ts` file. This generated file defines all page routes for the application, and provides type-safety for route paths. See the [routing section](#Routing) for more information on the file-based routing approach.
+- `tsr.config.json` (TanStack Router Vite extension configuration) - While the Vite dev server is running and watching for file changes (`bun run dev`), the TanStack Router Vite extension watches the `src/routes` directory for changes and automatically regenerates the `src/route-tree.gen.ts` file. This generated file defines all page routes for the application, and provides type-safety for route paths. See the [routing section](#Routing) for more information on the file-based routing approach.
 - `tsconfig.json` and `tsconfig.vite.json` (TypeScript configuration) - Defines several settings that are required for Vite/React, but also includes TypeScript strictness rules. A full list of rules and what they mean can be found [here](https://www.typescriptlang.org/tsconfig).
 - `vite.config.ts` (Vite configuration) - Contains build settings and extensions like the TanStack Router extension mentioned above.
 - `.env`, `env.dev`, `.env.uat`, `.env.prod` (dotenv configuration) - Vite uses these files to provide different sets of environment variables to the app based on the environment the app is running in. See the [Vite Env documentation](https://vitejs.dev/guide/env-and-mode) for more info. All custom environment variables should be added to the `src/env.d.ts` file, which provides type-safety for these environment variables throughout the rest of the application.
@@ -43,9 +43,9 @@ The `src` directory is where the main app code lives, and contains several subdi
 
 The `.vscode` directory contains `launch.json` and `tasks.json` files that tell VS Code how to build the application and launch the application in a browser window that can be debugged directly from VS Code. To run the dev server and launch a debuggable browser window, go to the `Run and Debug` tab in the sidebar in VSCode, select either `Debug Client (Edge)` or `Debug Client (Chrome)`,  then press the `F5` key. You should now be able to set breakpoints in React code in VS Code.
 
-If you don't need a debugger and would rather just start the dev server and open the page in a browser manually, you can run the default build task by pressing `ctrl+shift+b` (windows) or `cmd+shift+b` (mac), or you can run the `pnpm run dev` command from a terminal at the project root. Both methods run the same command.
+If you don't need a debugger and would rather just start the dev server and open the page in a browser manually, you can run the default build task by pressing `ctrl+shift+b` (windows) or `cmd+shift+b` (mac), or you can run the `bun run dev` command from a terminal at the project root. Both methods run the same command.
 
-Either way, as long as the `pnpm run dev` command is running, Vite will hot reload the browser tab whenever changes are saved.
+Either way, as long as the `bun run dev` command is running, Vite will hot reload the browser tab whenever changes are saved.
 
 ## Components
 
