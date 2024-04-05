@@ -1,3 +1,4 @@
+import { DATA_TABLE_PAGE_SIZES } from "@/constants";
 import { PaginatedResponseModel } from "@/models/examples/paged-result.model";
 import { UserModel } from "@/models/examples/user.model";
 import { usersQueryOptions } from "@/services/examples/users.service";
@@ -6,16 +7,15 @@ import { useQuery } from "@tanstack/react-query";
 import { DataTable } from "mantine-datatable";
 import { useState } from "react";
 
-const PAGE_SIZE = 10;
-
 interface Props {
   onUserSelected: (user: UserModel) => void;
 }
 
 function UsersList({ onUserSelected }: Props) {
   const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(DATA_TABLE_PAGE_SIZES[0] ?? 10);
   const { data, isFetching } = useQuery<PaginatedResponseModel<UserModel>>(
-    usersQueryOptions(page, PAGE_SIZE),
+    usersQueryOptions(page, pageSize),
   );
 
   return (
@@ -35,7 +35,9 @@ function UsersList({ onUserSelected }: Props) {
       records={data?.data ?? []}
       totalRecords={data?.total}
       page={page}
-      recordsPerPage={PAGE_SIZE}
+      recordsPerPage={pageSize}
+      recordsPerPageOptions={DATA_TABLE_PAGE_SIZES}
+      onRecordsPerPageChange={setPageSize}
       onPageChange={(p) => setPage(p)}
       fetching={isFetching}
       loaderType="dots"
