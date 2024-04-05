@@ -9,12 +9,12 @@ import {
 import { useForm, zodResolver } from "@mantine/form";
 import { useEffect } from "react";
 import { notifications } from "@mantine/notifications";
-import { UserModel, userSchema } from "@/models/examples/user.model";
+import { type UserModel, userSchema } from "@/models/examples/user.model";
 import { useUpdateUserMutation } from "@/services/examples/users.service";
 
 interface Props {
-	user: UserModel;
-	onSaved: () => void;
+  user: UserModel;
+  onSaved: () => void;
 }
 
 function UserForm({ user, onSaved }: Props) {
@@ -25,7 +25,7 @@ function UserForm({ user, onSaved }: Props) {
       notifications.show({
         title: "User updated",
         message:
-					"NOTE: this is mock data, so you will not see changes reflected in the Users list.",
+          "NOTE: this is mock data, so you will not see changes reflected in the Users list.",
       });
 
       onSaved?.();
@@ -79,7 +79,7 @@ function UserForm({ user, onSaved }: Props) {
           loaderProps={{ type: "dots" }}
           disabled={updateUserMutation?.status === "pending"}
         >
-					Save
+          Save
         </Button>
       </Group>
     </form>

@@ -16,11 +16,11 @@ axiosInstance.interceptors.request.use(
 
     notifications.show({
       title: "Error",
-      message: error
+      message: error,
     });
 
     return Promise.reject(error);
-  }
+  },
 );
 
 axiosInstance.interceptors.response.use(
@@ -32,9 +32,9 @@ axiosInstance.interceptors.response.use(
   (error) => {
     notifications.show({
       title: "Error",
-      message: error
+      message: error,
     });
 
     return Promise.reject(error);
-  }
+  },
 );

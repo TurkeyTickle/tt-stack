@@ -1,6 +1,6 @@
 import { DATA_TABLE_PAGE_SIZES } from "@/constants";
-import { PaginatedResponseModel } from "@/models/examples/paged-result.model";
-import { UserModel } from "@/models/examples/user.model";
+import type { PaginatedResponseModel } from "@/models/examples/paged-result.model";
+import type { UserModel } from "@/models/examples/user.model";
 import { usersQueryOptions } from "@/services/examples/users.service";
 import { Avatar } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";

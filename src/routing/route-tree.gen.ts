@@ -1,6 +1,6 @@
-/* eslint-disable */
+/* prettier-ignore-start */
 
-/* prettier-ignore */
+/* eslint-disable */
 
 // @ts-nocheck
 
@@ -10,7 +10,7 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './../routes/__root'
+import { Route as rootRoute } from "./../routes/__root"
 import { Route as MainLayoutImport } from "./../routes/_main-layout"
 import { Route as BlankLayoutImport } from "./../routes/_blank-layout"
 import { Route as MainLayoutIndexImport } from "./../routes/_main-layout/index"
@@ -104,3 +104,5 @@ export const routeTree = rootRoute.addChildren([
     MainLayoutExamplesUsersUserIdIndexRoute,
   ]),
 ])
+
+/* prettier-ignore-end */

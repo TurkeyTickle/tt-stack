@@ -1,4 +1,4 @@
-import { ZodType, z } from "zod";
+import { type ZodType, z } from "zod";
 
 export const paginatedResponseSchema = <TItem extends ZodType>(
   itemSchema: TItem,
@@ -13,7 +13,7 @@ export const paginatedResponseSchema = <TItem extends ZodType>(
 };
 
 type PaginatedResponseType<TItem extends ZodType> = ReturnType<
-	typeof paginatedResponseSchema<TItem>
+  typeof paginatedResponseSchema<TItem>
 >;
 
 export type PaginatedResponseModel<TItem> = z.infer<
